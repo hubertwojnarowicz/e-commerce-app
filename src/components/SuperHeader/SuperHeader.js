@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components/macro";
-import { COLORS, WEIGHTS, QUERIES } from "../../variables";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components/macro';
+import { COLORS, WEIGHTS, QUERIES } from '../../variables';
+import { Link } from 'react-router-dom';
 
 function SuperHeader() {
   return (
@@ -11,11 +11,11 @@ function SuperHeader() {
           <MemberShipDescription>
             Free Shipping + Returns, Free Membership, Exclusive Products
           </MemberShipDescription>
-          <MemberShipLink to="/kids">Join Now</MemberShipLink>
+          <MemberShipLink to="/sign-up">Join Now</MemberShipLink>
         </ShippingWrapper>
         <LoginButtonsWrapper>
-          <JoinUsLink to="/">Join Us</JoinUsLink>
-          <SignInLink to="woman">Sign In</SignInLink>
+          <JoinUsLink to="/sign-up">Join Us</JoinUsLink>
+          <SignInLink to="/sign-in">Sign In</SignInLink>
         </LoginButtonsWrapper>
       </SuperHeaderWrapper>
     </SuperHeaderFullWidth>
@@ -72,7 +72,7 @@ const LoginButtonsWrapper = styled.div`
   position: relative;
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     width: 2px;
     height: 100%;
