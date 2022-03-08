@@ -1,18 +1,19 @@
-import React from 'react';
-import SuperHeader from '../components/SuperHeader';
-import Header from '../components/Header/Header';
-import styled from 'styled-components/macro';
+import React from "react";
+import SuperHeader from "../components/SuperHeader";
+import Header from "../components/Header/Header";
+import HeadlineSection from "../components/HeadlineSection";
+import GallerySection from "../components/GallerySection";
+import styled from "styled-components/macro";
 
-function dashboard() {
+function Dashboard() {
   return (
     <>
       <SuperHeader />
       <Header />
-      <Image src="images/alexander-redl-d3bYmnZ0ank-unsplash.jpg" alt="hello" />
+      <HeadlineSection />
+      <GallerySection />
     </>
   );
 }
 
-export default dashboard;
-
-const Image = styled.img``;
+export default Dashboard;

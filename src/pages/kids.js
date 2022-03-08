@@ -1,7 +1,7 @@
 import React from "react";
 
-function kids() {
+function Kids() {
   return <div>kids</div>;
 }
 
-export default kids;
+export default Kids;
