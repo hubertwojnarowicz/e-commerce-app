@@ -1,7 +1,7 @@
 import React from "react";
 
-function Man() {
+function Men() {
   return <div>man</div>;
 }
 
-export default Man;
+export default Men;
