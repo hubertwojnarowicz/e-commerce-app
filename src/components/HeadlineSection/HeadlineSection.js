@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components/macro";
-import { COLORS, QUERIES, WEIGHTS } from "../../variables";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components/macro';
+import { COLORS, QUERIES, WEIGHTS } from '../../variables';
 
 function HeadlineSection() {
   return (
@@ -25,14 +25,20 @@ function HeadlineSection() {
 export default HeadlineSection;
 
 const SectionWrapper = styled.section`
-  max-width: 1920px;
-  overflow: auto;
-
-  margin: 32px 32px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
 `;
 
 const HeadlineFigure = styled.figure`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   max-width: 1920px;
+  margin: 0 32px;
 `;
 
 const FigureImg = styled.img`
@@ -44,11 +50,17 @@ const ImageCaption = styled.figcaption`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 8px;
+  margin-top: 24px;
   gap: 12px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    gap: 8px;
+  }
 `;
 
-const Novelty = styled.p``;
+const Novelty = styled.p`
+  font-size: 1.125rem;
+`;
 
 const ShoesTitle = styled.h1`
   font-size: 4rem;
@@ -90,5 +102,9 @@ const LinkToBuy = styled(Link)`
   &:hover {
     background-color: ${COLORS.gray[200]};
     transition: 0.4s;
+  }
+
+  @media ${QUERIES.tabletAndSmaller} {
+    font-size: 1rem;
   }
 `;
