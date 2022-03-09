@@ -1,6 +1,6 @@
 export const DASHBOARD = '/';
-export const MAN = '/man';
-export const WOMAN = '/woman';
+export const MEN = '/men';
+export const WOMEN = '/women';
 export const KIDS = '/kids';
 export const NEWRELEASES = '/new-releases';
 export const CART = '/cart';
