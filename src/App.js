@@ -4,8 +4,8 @@ import * as ROUTES from './constants/routes';
 import ReactLoader from './components/Loader';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Man = lazy(() => import('./pages/Man'));
-const Woman = lazy(() => import('./pages/Woman'));
+const Men = lazy(() => import('./pages/Men'));
+const Women = lazy(() => import('./pages/Women'));
 const Kids = lazy(() => import('./pages/Kids'));
 const Cart = lazy(() => import('./pages/Cart'));
 const NewReleases = lazy(() => import('./pages/NewReleases'));
@@ -20,8 +20,8 @@ export default function App() {
       <Suspense fallback={<ReactLoader />}>
         <Routes>
           <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
-          <Route path={ROUTES.MAN} element={<Man />} />
-          <Route path={ROUTES.WOMAN} element={<Woman />} />
+          <Route path={ROUTES.MEN} element={<Men />} />
+          <Route path={ROUTES.WOMEN} element={<Women />} />
           <Route path={ROUTES.KIDS} element={<Kids />} />
           <Route path={ROUTES.CART} element={<Cart />} />
           <Route path={ROUTES.NEWRELEASES} element={<NewReleases />} />
