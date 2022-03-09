@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
-import { COLORS } from "../../variables";
+import React from 'react';
+import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
+import { COLORS, QUERIES } from '../../variables';
 
 function GallerySection() {
   return (
@@ -34,18 +34,22 @@ function GallerySection() {
 export default GallerySection;
 
 const GalleryWrapper = styled.section`
-  max-width: 1920px;
-  margin: 16px 32px 16px 32px;
-  overflow: auto;
+  width: 100%;
+  display: grid;
+  place-content: center;
+  margin-top: 32px;
 `;
 
 const GalleryTitle = styled.h2`
-  font-size: 1.75rem;
+  font-size: 2rem;
+  margin-left: 32px;
 `;
 
 const GalleryGrid = styled.div`
   max-width: 1920px;
   display: grid;
+  place-content: center;
+  margin: 0 32px;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 12px;
@@ -100,6 +104,16 @@ const MansCaption = styled.figcaption`
     background-color: ${COLORS.gray[900]};
     transition: 0.4s;
   }
+
+  @media ${QUERIES.tabletAndSmaller} {
+    font-size: 1.125rem;
+    padding: 6px 16px;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: 0.95rem;
+    padding: 4px 12px;
+  }
 `;
 const WomansCaption = styled.figcaption`
   position: absolute;
@@ -115,6 +129,16 @@ const WomansCaption = styled.figcaption`
     background-color: ${COLORS.gray[900]};
     transition: 0.4s;
   }
+
+  @media ${QUERIES.tabletAndSmaller} {
+    font-size: 1.125rem;
+    padding: 6px 16px;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: 0.95rem;
+    padding: 4px 12px;
+  }
 `;
 const KidsCaption = styled.figcaption`
   position: absolute;
@@ -129,5 +153,15 @@ const KidsCaption = styled.figcaption`
   &:hover {
     background-color: ${COLORS.gray[900]};
     transition: 0.4s;
+  }
+
+  @media ${QUERIES.tabletAndSmaller} {
+    font-size: 1.125rem;
+    padding: 6px 16px;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: 0.95rem;
+    padding: 4px 12px;
   }
 `;
