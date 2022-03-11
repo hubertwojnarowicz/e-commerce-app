@@ -1,29 +1,37 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Popular } from '../../data/data';
-
-import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
-import { COLORS, QUERIES } from '../../variables';
-import { ChevronLeft, ChevronRight, Tablet } from 'react-feather';
+import React, { useEffect, useRef, useState } from "react";
+import { Popular } from "../../data/data";
+import styled from "styled-components/macro";
+import { Link } from "react-router-dom";
+import { COLORS, QUERIES } from "../../variables";
+import { ChevronLeft, ChevronRight } from "react-feather";
 
 function Slider() {
   const wrapperWidth = useRef(0);
+  const slideLeft = useRef(0);
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
     setHeight(wrapperWidth.current.clientWidth);
   }, [height]);
 
+  const scroll = (scrollValue) => {
+    wrapperWidth.current.scrollLeft += scrollValue;
+  };
+
   return (
     <ShoeWrapper>
       <ShoeHeadingWrapper>
         <SliderTitle>Popular Right Now</SliderTitle>
         <ShoeButtonsWrapper>
-          <ArrowButton>
-            <ChevronLeft size={36} />
+          <ArrowButton
+            onClick={() => scroll(-slideLeft.current.clientWidth - 17)}
+          >
+            <ChevronLeft size={32} />
           </ArrowButton>
-          <ArrowButton>
-            <ChevronRight size={36} />
+          <ArrowButton
+            onClick={() => scroll(slideLeft.current.clientWidth + 17)}
+          >
+            <ChevronRight size={32} />
           </ArrowButton>
         </ShoeButtonsWrapper>
       </ShoeHeadingWrapper>
@@ -31,16 +39,16 @@ function Slider() {
         {Popular.map((shoe) => {
           const { index, imgSrc, name, price, desc } = shoe;
           return (
-            <ShoeItem key={index}>
-              <ShoeLink to="/">
+            <ShoeItem key={index} ref={slideLeft}>
+              <ShoeLink to="/new-release">
                 <DesktopShoeImg
                   src={imgSrc}
                   alt="Shoe"
-                  height={height / 3.05}
+                  height={height / 3.08}
                 />
 
                 <TabletShoeImg src={imgSrc} alt="Shoe" height={height / 2.05} />
-                <PhoneShoeImg src={imgSrc} alt="Shoe" height={height / 1.05} />
+                <PhoneShoeImg src={imgSrc} alt="Shoe" height={height / 1.03} />
                 <ShoeNamePriceWrapper>
                   <ShoeName>{name}</ShoeName>
                   <ShoePrice>${price}</ShoePrice>
@@ -66,12 +74,14 @@ const ShoeWrapper = styled.section`
 
 const ShoeHeadingWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin: 0 32px;
+  align-items: center;
+  margin-left: 32px;
+  margin-right: 32px;
 `;
 
 const ShoeButtonsWrapper = styled.div`
   display: flex;
+  margin-left: auto;
   gap: 8px;
 `;
 
@@ -81,7 +91,8 @@ const ArrowButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1;
+  cursor: pointer;
 `;
 
 const SliderTitle = styled.h2`
@@ -91,13 +102,16 @@ const SliderTitle = styled.h2`
 const ImagesWrapper = styled.ul`
   max-width: 1920px;
   display: flex;
-  overflow: auto;
+  overflow-x: scroll;
   gap: 16px;
   margin-left: 32px;
   margin-right: 32px;
 `;
 
-const ShoeItem = styled.li``;
+const ShoeItem = styled.li`
+  position: relative;
+  transition: all 0.3s;
+`;
 
 const ShoeLink = styled(Link)`
   text-decoration: none;
@@ -105,7 +119,6 @@ const ShoeLink = styled(Link)`
 
 const DesktopShoeImg = styled.img`
   object-fit: contain;
-
   @media ${QUERIES.tabletAndSmaller} {
     display: none;
   }
@@ -138,12 +151,12 @@ const ShoeNamePriceWrapper = styled.div`
 
 const ShoeName = styled.h4`
   color: ${COLORS.black};
-  margin-left: 2px;
+  margin-left: 4px;
   font-size: 1.25rem;
 `;
 
 const ShoePrice = styled.span`
-  margin-right: 8px;
+  margin-right: 12px;
 
   color: ${COLORS.black};
 `;
@@ -151,6 +164,6 @@ const ShoePrice = styled.span`
 const ShoeDesc = styled.p`
   margin-top: 4px;
   color: ${COLORS.gray[300]};
-  margin-bottom: 4px;
-  margin-left: 2px;
+  margin-bottom: 8px;
+  margin-left: 4px;
 `;
