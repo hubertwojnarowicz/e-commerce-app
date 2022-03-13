@@ -1,0 +1,20 @@
+import { initializeApp } from 'firebase/app';
+import 'firebase/auth';
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: 'AIzaSyB1kFJHGSNS8cuRuPyvSvqhuE_usUPbxg0',
+  authDomain: 'e-commerce-project-b37ec.firebaseapp.com',
+  projectId: 'e-commerce-project-b37ec',
+  storageBucket: 'e-commerce-project-b37ec.appspot.com',
+  messagingSenderId: '1069663769736',
+  appId: '1:1069663769736:web:b98d5d50582b2ee5bd7b3d',
+};
+
+// Initialize Firebase
+const firebase = initializeApp(firebaseConfig);
+
+export { firebase };

@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Popular } from "../../data/data";
-import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
-import { COLORS, QUERIES } from "../../variables";
-import { ChevronLeft, ChevronRight } from "react-feather";
+import React, { useEffect, useRef, useState } from 'react';
+import { Popular } from '../../data/data';
+import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
+import { COLORS, QUERIES } from '../../variables';
+import { ChevronLeft, ChevronRight } from 'react-feather';
 
 function Slider() {
   const wrapperWidth = useRef(0);
@@ -44,7 +44,7 @@ function Slider() {
                 <DesktopShoeImg
                   src={imgSrc}
                   alt="Shoe"
-                  height={height / 3.08}
+                  height={height / 3.06}
                 />
 
                 <TabletShoeImg src={imgSrc} alt="Shoe" height={height / 2.05} />
@@ -118,7 +118,6 @@ const ShoeLink = styled(Link)`
 `;
 
 const DesktopShoeImg = styled.img`
-  object-fit: contain;
   @media ${QUERIES.tabletAndSmaller} {
     display: none;
   }
