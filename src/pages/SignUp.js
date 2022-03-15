@@ -1,29 +1,38 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { FirebaseContext } from '../context/firebase';
-import { Link, useNavigate } from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
-import Header from '../components/Header/Header';
-import styled from 'styled-components/macro';
-import Footer from '../components/Footer';
-import { COLORS, WEIGHTS } from '../variables';
+import React, { useState, useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import ReactLoader from "../components/Loader/ReactLoader";
+import * as ROUTES from "../constants/routes";
+import Header from "../components/Header/Header";
+import styled from "styled-components/macro";
+import Footer from "../components/Footer";
+import { COLORS, WEIGHTS } from "../variables";
+import { auth, registerWithEmailAndPassword } from "../lib/firebase";
 
 function Signup() {
-  const history = useNavigate();
-  const { firebase } = useContext(FirebaseContext);
-  const [firstName, setFirstName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const isInvalid = firstName === '' || email === '' || password === '';
+  const navigate = useNavigate();
+  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
-    document.title = 'Register';
+    document.title = "Register";
   }, []);
 
-  const handleSubmit = (e) => {
+  const register = (e) => {
     e.preventDefault();
-    history(`${ROUTES.DASHBOARD}`);
+    registerWithEmailAndPassword(name, email, password);
+    if (loading) return <ReactLoader />;
+    if (user) navigate("/");
+    if (error) console.log(error);
   };
+
+  useEffect(() => {
+    if (user) return <ReactLoader />;
+    if (!user) return;
+  }, [user]);
+
   return (
     <>
       <Header />
@@ -36,24 +45,34 @@ function Signup() {
             very best of Fresh Balance products, inspiration and community.
           </SignUpDesc>
         </SignUpHeader>
-        <SignUpForm onSubmit={handleSubmit}>
+        <SignUpForm onSubmit={register} method="POST">
           <FormInput
             aria-label="Enter Your First Name"
             type="text"
             placeholder="First Name"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            value={name}
           />
           <FormInput
             aria-label="Enter Your Email Address"
             type="email"
             placeholder="Email address"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            value={email}
           />
           <FormInput
             aria-label="Enter Your Password"
             type="password"
             placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
 
-          <SubmitButton>Join Us</SubmitButton>
+          <SubmitButton type="submit">Join Us</SubmitButton>
         </SignUpForm>
         <SignInText>
           Already a member?
@@ -86,13 +105,17 @@ const SignUpHeader = styled.div`
   margin: 0 16px;
 `;
 
-const Logo = styled.img``;
+const Logo = styled.img`
+  height: 56px;
+  object-fit: cover;
+`;
 
 const SignUpTitle = styled.h2`
   text-transform: uppercase;
 `;
 const SignUpDesc = styled.p`
   text-align: center;
+  font-size: 0.875rem;
 `;
 
 const SignUpForm = styled.form`
@@ -106,11 +129,13 @@ const SignUpForm = styled.form`
 
 const FormInput = styled.input`
   width: 100%;
-  padding: 4px 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 
   ::placeholder,
   ::-webkit-input-placeholder {
     font-size: 1.125rem;
+    text-align: left;
   }
 
   :focus {
