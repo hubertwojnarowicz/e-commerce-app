@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { ChevronRight, X } from 'react-feather';
 import { COLORS, QUERIES } from '../../variables';
+import * as ROUTES from '../../constants/routes';
 import { Link } from 'react-router-dom';
 
 function MobileNav({ isOpen, onDismiss }) {
@@ -16,31 +17,31 @@ function MobileNav({ isOpen, onDismiss }) {
       <MobileNavigation>
         <PrimaryMobileNavigation>
           <MobileListItems>
-            <MobileLink to="/new-releases">
+            <MobileLink to={ROUTES.NEWRELEASES}>
               <LinkChild>New Releases</LinkChild>
               <ChevronRight size="32" />
             </MobileLink>
           </MobileListItems>
           <MobileListItems>
-            <MobileLink to="/man">
+            <MobileLink to={ROUTES.MEN}>
               <LinkChild>Man</LinkChild>
               <ChevronRight size="32" />
             </MobileLink>
           </MobileListItems>
           <MobileListItems>
-            <MobileLink to="woman">
+            <MobileLink to={ROUTES.WOMEN}>
               <LinkChild>Woman</LinkChild>
               <ChevronRight size="32" />
             </MobileLink>
           </MobileListItems>
           <MobileListItems>
-            <MobileLink to="kids">
+            <MobileLink to={ROUTES.KIDS}>
               <LinkChild>Kids</LinkChild>
               <ChevronRight size="32" />
             </MobileLink>
           </MobileListItems>
           <MobileListItems>
-            <MobileLink to="sale">
+            <MobileLink to={ROUTES.SALE}>
               <LinkChild>Sale</LinkChild>
               <ChevronRight size="32" />
             </MobileLink>
@@ -52,8 +53,8 @@ function MobileNav({ isOpen, onDismiss }) {
         stories in sport.
       </Description>
       <LoginsWrapper>
-        <JoinsUsLink to="sign-up">Join Us</JoinsUsLink>
-        <LoginLink to="sign-in">Sign In</LoginLink>
+        <JoinsUsLink to={ROUTES.SIGNUP}>Join Us</JoinsUsLink>
+        <LoginLink to={ROUTES.SIGNIN}>Sign In</LoginLink>
       </LoginsWrapper>
     </MobileNavWrapper>
   );

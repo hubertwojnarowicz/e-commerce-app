@@ -1,40 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
-import ReactLoader from "../components/Loader/ReactLoader";
-import * as ROUTES from "../constants/routes";
-import Header from "../components/Header/Header";
-import styled from "styled-components/macro";
-import Footer from "../components/Footer";
-import { COLORS, WEIGHTS } from "../variables";
-import { auth, registerWithEmailAndPassword } from "../lib/firebase";
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
+import SuperHeader from '../components/SuperHeader';
+import Header from '../components/Header/Header';
+import styled from 'styled-components/macro';
+import Footer from '../components/Footer';
+
+import { COLORS, WEIGHTS } from '../variables';
+import {
+  auth,
+  registerWithEmailAndPassword,
+  doesUsernameExist,
+} from '../lib/firebase';
 
 function Signup() {
   const navigate = useNavigate();
-  const [user, loading, error] = useAuthState(auth);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [error, setError] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
-    document.title = "Register";
+    document.title = 'Register';
   }, []);
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
-    registerWithEmailAndPassword(name, email, password);
-    if (loading) return <ReactLoader />;
-    if (user) navigate("/");
-    if (error) console.log(error);
-  };
 
-  useEffect(() => {
-    if (user) return <ReactLoader />;
-    if (!user) return;
-  }, [user]);
+    const userNameExists = await doesUsernameExist(name);
+    if (!userNameExists) {
+      try {
+        await registerWithEmailAndPassword(name, email, password);
+        navigate(ROUTES.DASHBOARD);
+      } catch (error) {
+        setName('');
+        setEmail('');
+        setPassword('');
+        setError(error.message);
+      }
+    } else {
+      setName('');
+      setError('That username is already taken, please try another.');
+    }
+  };
 
   return (
     <>
+      <SuperHeader />
       <Header />
       <SignUpWrapper>
         <SignUpHeader>
@@ -45,7 +57,7 @@ function Signup() {
             very best of Fresh Balance products, inspiration and community.
           </SignUpDesc>
         </SignUpHeader>
-        <SignUpForm onSubmit={register} method="POST">
+        <SignUpForm method="POST" onSubmit={register}>
           <FormInput
             aria-label="Enter Your First Name"
             type="text"
@@ -78,6 +90,7 @@ function Signup() {
           Already a member?
           <SignInLink to="/sign-in">Sign In</SignInLink>
         </SignInText>
+        <ErrorMessage>{error}</ErrorMessage>
       </SignUpWrapper>
       <Footer />
     </>
@@ -91,7 +104,7 @@ const SignUpWrapper = styled.main`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 79%;
+  height: 76%;
   margin: 0 16px;
 `;
 
@@ -100,7 +113,7 @@ const SignUpHeader = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   max-width: 380px;
   margin: 0 16px;
 `;
@@ -112,6 +125,7 @@ const Logo = styled.img`
 
 const SignUpTitle = styled.h2`
   text-transform: uppercase;
+  font-size: 1.25rem;
 `;
 const SignUpDesc = styled.p`
   text-align: center;
@@ -157,6 +171,7 @@ const SubmitButton = styled.button`
   border-radius: 4px;
   font-weight: ${WEIGHTS.bold};
   padding: 12px 0px;
+  cursor: pointer;
 `;
 
 const SignInText = styled.p`
@@ -168,4 +183,9 @@ const SignInText = styled.p`
 const SignInLink = styled(Link)`
   color: ${COLORS.black};
   margin-left: 2px;
+`;
+
+const ErrorMessage = styled.span`
+  text-align: center;
+  color: red;
 `;

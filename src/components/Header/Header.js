@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { COLORS, WEIGHTS, QUERIES } from '../../variables';
 import { Trash, Heart, Menu, Search, Tablet } from 'react-feather';
 import MobileNav from '../MobileNav';
+import * as ROUTES from '../../constants/routes';
 
 export default function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -26,19 +27,19 @@ export default function Header() {
         <DesktopNavigation>
           <PrimaryNavigation>
             <ListItem>
-              <NavLink to="/new-releases">New Releases</NavLink>
+              <NavLink to={ROUTES.NEWRELEASES}>New Releases</NavLink>
             </ListItem>
             <ListItem>
-              <NavLink to="/man">Man</NavLink>
+              <NavLink to={ROUTES.MEN}>Men</NavLink>
             </ListItem>
             <ListItem>
-              <NavLink to="/woman">Woman</NavLink>
+              <NavLink to={ROUTES.WOMEN}>Women</NavLink>
             </ListItem>
             <ListItem>
-              <NavLink to="/kids">Kids</NavLink>
+              <NavLink to={ROUTES.KIDS}>Kids</NavLink>
             </ListItem>
             <ListItem>
-              <NavLink to="/sale">Sale</NavLink>
+              <NavLink to={ROUTES.SALE}>Sale</NavLink>
             </ListItem>
           </PrimaryNavigation>
         </DesktopNavigation>
@@ -51,7 +52,7 @@ export default function Header() {
               <Icon size="24" />
             </IconButton>
           </Form>
-          <FavouritesLink to="/favourites">
+          <FavouritesLink to={ROUTES.FAVOURITES}>
             <Heart size="32" />
           </FavouritesLink>
           <CartLink to="cart">
@@ -59,9 +60,9 @@ export default function Header() {
           </CartLink>
         </SearchWrapper>
         <TabletWrapper>
-          <CartLink to="cart">
+          <CartLinkMobile to={ROUTES.CART}>
             <Trash size="28" />
-          </CartLink>
+          </CartLinkMobile>
           <SearchButton>
             <Search size="28" />
           </SearchButton>
@@ -74,9 +75,9 @@ export default function Header() {
           />
         </TabletWrapper>
         <MobileWrapper>
-          <CartLink to="cart">
+          <CartLinkMobile to={ROUTES.CART}>
             <Trash size="24" />
-          </CartLink>
+          </CartLinkMobile>
           <SearchButton>
             <Search size="24" />
           </SearchButton>
@@ -175,7 +176,7 @@ const NavLink = styled(Link)`
 const SearchWrapper = styled.div`
   margin-left: auto;
   display: flex;
-  gap: 24px;
+  gap: 16px;
   align-items: center;
 
   @media ${QUERIES.tabletAndSmaller} {
@@ -235,10 +236,34 @@ const Icon = styled(Search)``;
 
 const FavouritesLink = styled(Link)`
   color: ${COLORS.black};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  background-color: ${COLORS.white};
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+
+  &:hover {
+    background-color: ${COLORS.gray[900]};
+  }
 `;
 
 const CartLink = styled(Link)`
   color: ${COLORS.black};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  background-color: ${COLORS.white};
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+
+  &:hover {
+    background-color: ${COLORS.gray[900]};
+  }
 `;
 
 const TabletWrapper = styled.div`
@@ -254,6 +279,10 @@ const TabletWrapper = styled.div`
   @media ${QUERIES.phoneAndSmaller} {
     display: none;
   }
+`;
+
+const CartLinkMobile = styled(Link)`
+  color: ${COLORS.black};
 `;
 
 const SearchButton = styled.button`
@@ -276,6 +305,8 @@ const MobileWrapper = styled.div`
   @media ${QUERIES.phoneAndSmaller} {
     display: flex;
     margin-left: auto;
+    align-items: center;
+    justify-content: center;
     gap: 12px;
   }
 `;

@@ -1,10 +1,10 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-} from "firebase/auth";
+} from 'firebase/auth';
 import {
   getFirestore,
   query,
@@ -12,19 +12,19 @@ import {
   getDocs,
   where,
   addDoc,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB1kFJHGSNS8cuRuPyvSvqhuE_usUPbxg0",
-  authDomain: "e-commerce-project-b37ec.firebaseapp.com",
-  projectId: "e-commerce-project-b37ec",
-  storageBucket: "e-commerce-project-b37ec.appspot.com",
-  messagingSenderId: "1069663769736",
-  appId: "1:1069663769736:web:b98d5d50582b2ee5bd7b3d",
+  apiKey: 'AIzaSyB1kFJHGSNS8cuRuPyvSvqhuE_usUPbxg0',
+  authDomain: 'e-commerce-project-b37ec.firebaseapp.com',
+  projectId: 'e-commerce-project-b37ec',
+  storageBucket: 'e-commerce-project-b37ec.appspot.com',
+  messagingSenderId: '1069663769736',
+  appId: '1:1069663769736:web:b98d5d50582b2ee5bd7b3d',
 };
 
 // Initialize Firebase
@@ -41,18 +41,23 @@ const loginWithEmailAndPassword = async (email, password) => {
 };
 
 const registerWithEmailAndPassword = async (name, email, password) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      name,
-      authProvider: "local",
-      email,
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  const res = await createUserWithEmailAndPassword(auth, email, password);
+  const user = res.user;
+  await addDoc(collection(db, 'users'), {
+    uid: user.uid,
+    name,
+    authProvider: 'local',
+    email,
+  });
+};
+
+const doesUsernameExist = async (name) => {
+  const result = query(
+    collection(db, 'users'),
+    where('name', '==', name.toLowerCase())
+  );
+  const docs = await getDocs(result);
+  return docs.docs.length > 0; // if there is no user the length of the docs array is 0
 };
 
 const logout = () => {
@@ -64,5 +69,6 @@ export {
   db,
   registerWithEmailAndPassword,
   loginWithEmailAndPassword,
+  doesUsernameExist,
   logout,
 };

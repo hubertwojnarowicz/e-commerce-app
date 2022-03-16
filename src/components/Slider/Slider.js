@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Popular } from '../../data/data';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import { COLORS, QUERIES } from '../../variables';
 import { ChevronLeft, ChevronRight } from 'react-feather';
@@ -110,11 +110,11 @@ const ImagesWrapper = styled.ul`
 
 const ShoeItem = styled.li`
   position: relative;
-  transition: all 0.3s;
 `;
 
 const ShoeLink = styled(Link)`
   text-decoration: none;
+  animation: fadeVisibility 0.5s;
 `;
 
 const DesktopShoeImg = styled.img`
@@ -165,4 +165,14 @@ const ShoeDesc = styled.p`
   color: ${COLORS.gray[300]};
   margin-bottom: 8px;
   margin-left: 4px;
+`;
+
+const fadeVisibility = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: opacity linear;
+  }
 `;
