@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
-import { COLORS, WEIGHTS, QUERIES } from '../../variables';
-import { Trash, Heart, Menu, Search, Tablet } from 'react-feather';
-import MobileNav from '../MobileNav';
-import * as ROUTES from '../../constants/routes';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components/macro";
+import { Link } from "react-router-dom";
+import { COLORS, WEIGHTS, QUERIES } from "../../variables";
+import { Trash, Heart, Menu, Search, Tablet } from "react-feather";
+import MobileNav from "../MobileNav";
+import * as ROUTES from "../../constants/routes";
 
 export default function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -12,9 +12,9 @@ export default function Header() {
 
   useEffect(() => {
     if (showMobileMenu) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
   }, [showMobileMenu]);
 
@@ -155,7 +155,7 @@ const NavLink = styled(Link)`
   white-space: nowrap;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 0%;
     height: 3px;
@@ -194,7 +194,7 @@ const SearchInputWrapper = styled.div`
   background-color: ${COLORS.gray[1000]};
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   padding: 8px 24px;
 
   &:hover {

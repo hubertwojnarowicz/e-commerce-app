@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
-import SuperHeader from '../components/SuperHeader';
-import Header from '../components/Header/Header';
-import styled from 'styled-components/macro';
-import Footer from '../components/Footer';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as ROUTES from "../constants/routes";
+import SuperHeader from "../components/SuperHeader";
+import Header from "../components/Header/Header";
+import styled from "styled-components/macro";
+import Footer from "../components/Footer";
 
-import { COLORS, WEIGHTS } from '../variables';
+import { COLORS, WEIGHTS } from "../variables";
 import {
   auth,
   registerWithEmailAndPassword,
   doesUsernameExist,
-} from '../lib/firebase';
+} from "../lib/firebase";
 
 function Signup() {
   const navigate = useNavigate();
-  const [error, setError] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [error, setError] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
-    document.title = 'Register';
+    document.title = "Register";
   }, []);
 
   const register = async (e) => {
@@ -33,14 +33,14 @@ function Signup() {
         await registerWithEmailAndPassword(name, email, password);
         navigate(ROUTES.DASHBOARD);
       } catch (error) {
-        setName('');
-        setEmail('');
-        setPassword('');
+        setName("");
+        setEmail("");
+        setPassword("");
         setError(error.message);
       }
     } else {
-      setName('');
-      setError('That username is already taken, please try another.');
+      setName("");
+      setError("That username is already taken, please try another.");
     }
   };
 
@@ -125,11 +125,13 @@ const Logo = styled.img`
 
 const SignUpTitle = styled.h2`
   text-transform: uppercase;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  text-align: center;
 `;
 const SignUpDesc = styled.p`
   text-align: center;
   font-size: 0.875rem;
+  color: ${COLORS.gray[500]};
 `;
 
 const SignUpForm = styled.form`
@@ -143,12 +145,16 @@ const SignUpForm = styled.form`
 
 const FormInput = styled.input`
   width: 100%;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding: 0 16px;
+  height: 36px;
+  border: none;
+  display: inline-block;
+  border: 1px solid ${COLORS.gray[700]};
+  border-radius: 4px;
 
   ::placeholder,
   ::-webkit-input-placeholder {
-    font-size: 1.125rem;
+    font-size: 1.05rem;
     text-align: left;
   }
 
@@ -157,7 +163,7 @@ const FormInput = styled.input`
   }
 
   :focus::placeholder {
-    color: ${COLORS.gray[600]};
+    color: ${COLORS.gray[700]};
   }
 `;
 
@@ -176,8 +182,8 @@ const SubmitButton = styled.button`
 
 const SignInText = styled.p`
   font-size: 0.825rem;
-  color: ${COLORS.gray[300]};
-  margin-top: 8px;
+  color: ${COLORS.gray[500]};
+  margin-top: 12px;
 `;
 
 const SignInLink = styled(Link)`
