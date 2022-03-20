@@ -1,18 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth';
-import {
-  getFirestore,
-  query,
-  collection,
-  getDocs,
-  where,
-  addDoc,
-} from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -32,43 +20,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const loginWithEmailAndPassword = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const logout = async () => {
+//   await signOut(auth);
+// };
 
-const registerWithEmailAndPassword = async (name, email, password) => {
-  const res = await createUserWithEmailAndPassword(auth, email, password);
-  const user = res.user;
-  await addDoc(collection(db, 'users'), {
-    uid: user.uid,
-    name,
-    authProvider: 'local',
-    email,
-  });
-};
-
-const doesUsernameExist = async (name) => {
-  const result = query(
-    collection(db, 'users'),
-    where('name', '==', name.toLowerCase())
-  );
-  const docs = await getDocs(result);
-  return docs.docs.length > 0; // if there is no user the length of the docs array is 0
-};
-
-const logout = () => {
-  signOut(auth);
-};
-
-export {
-  auth,
-  db,
-  registerWithEmailAndPassword,
-  loginWithEmailAndPassword,
-  doesUsernameExist,
-  logout,
-};
+export { app, auth, db };

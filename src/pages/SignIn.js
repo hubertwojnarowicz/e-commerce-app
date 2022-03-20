@@ -1,19 +1,35 @@
-import React, { useState, useEffect } from "react";
-import SuperHeader from "../components/SuperHeader";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer";
-import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
-import { COLORS, WEIGHTS } from "../variables";
-import * as ROUTES from "../constants/routes";
+import React, { useState, useEffect, useContext } from 'react';
+import SuperHeader from '../components/SuperHeader';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer';
+import styled from 'styled-components/macro';
+import { Link, useNavigate } from 'react-router-dom';
+import { COLORS, WEIGHTS } from '../variables';
+import * as ROUTES from '../constants/routes';
+import FirebaseContext from '../context/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 function Signin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const firebase = useContext(FirebaseContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const login = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(firebase.auth, email, password);
+      navigate(ROUTES.DASHBOARD);
+    } catch (error) {
+      setEmail('');
+      setPassword('');
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
-    document.title = "Login";
+    document.title = 'Login';
   }, []);
   return (
     <>
@@ -24,10 +40,10 @@ function Signin() {
           <Logo src="images/assets/logo.jpg" />
           <SignInTitle>Your account for everything Fresh Balance</SignInTitle>
         </SignInHeader>
-        <SignInForm>
+        <SignInForm onSubmit={login}>
           <FormInput
             value={email}
-            type="text"
+            type="email"
             aria-label="Enter Your Email Address"
             placeholder="Email address"
             onChange={(e) => setEmail(e.target.value)}
@@ -40,8 +56,8 @@ function Signin() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <TermsOfUse>
-            By logging in, you agree to Fresh Balance's{" "}
-            <TermsLink to={ROUTES.DASHBOARD}>Privacy Policy </TermsLink> and{" "}
+            By logging in, you agree to Fresh Balance's{' '}
+            <TermsLink to={ROUTES.DASHBOARD}>Privacy Policy </TermsLink> and{' '}
             <TermsLink to={ROUTES.DASHBOARD}>Terms of Use.</TermsLink>
           </TermsOfUse>
           <SubmitButton type="submit">Sign In</SubmitButton>
@@ -49,6 +65,7 @@ function Signin() {
         <SignUpText>
           Not a member? <JoinUsLink to={ROUTES.SIGNUP}>Join us.</JoinUsLink>
         </SignUpText>
+        <ErrorMessage>{error}</ErrorMessage>
       </SignInWrapper>
       <Footer />
     </>
@@ -70,7 +87,7 @@ const SignInHeader = styled.div`
   max-width: 380px;
   display: flex;
   align-items: center;
-  justifty-content: center;
+  justify-content: center;
   flex-direction: column;
   gap: 12px;
 `;
@@ -150,4 +167,9 @@ const SignUpText = styled.p`
 
 const JoinUsLink = styled(Link)`
   color: ${COLORS.black};
+`;
+
+const ErrorMessage = styled.span`
+  text-align: center;
+  color: red;
 `;
