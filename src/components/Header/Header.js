@@ -109,6 +109,7 @@ const HeaderWrapper = styled.header`
   height: 60px;
   display: flex;
   align-items: center;
+
   background: ${COLORS.white};
   margin: 0 32px;
   gap: 16px;
@@ -190,27 +191,27 @@ const Form = styled.form`
 `;
 
 const SearchInputWrapper = styled.div`
-  border-radius: 24px;
-  background-color: ${COLORS.gray[1000]};
-  height: 100%;
-  display: flex;
-  align-items: baseline;
-  padding: 8px 24px;
+  // border-radius: 24px;
+  // background-color: ${COLORS.gray[1000]};
+  // height: 100%;
+  // display: flex;
+  // align-items: baseline;
+  // padding: 8px 24px;
 
-  &:hover {
-    background-color: ${COLORS.gray[900]};
-  }
+  // &:hover {
+  //   background-color: ${COLORS.gray[900]};
+  // }
 `;
 
 const SearchInput = styled.input`
-  border: none;
-  background-color: inherit;
-  border-radius: 24px;
-  margin-left: 16px;
+  // border: none;
+  // background-color: inherit;
+  // border-radius: 24px;
+  // margin-left: 16px;
 
-  &:focus {
-    outline: none;
-  }
+  // &:focus {
+  //   outline: none;
+  // }
 `;
 
 const IconButton = styled.button`

@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components/macro';
-import { ChevronRight, X } from 'react-feather';
-import { COLORS, QUERIES } from '../../variables';
-import * as ROUTES from '../../constants/routes';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components/macro";
+import { ChevronRight, X } from "react-feather";
+import { COLORS, QUERIES } from "../../variables";
+import * as ROUTES from "../../constants/routes";
+import { Link } from "react-router-dom";
 
 function MobileNav({ isOpen, onDismiss }) {
   if (!isOpen) {
@@ -89,6 +89,7 @@ const CloseButton = styled.button`
   outline: none;
   background-color: ${COLORS.white};
   margin-left: auto;
+  cursor: pointer;
 `;
 
 const MobileNavigation = styled.nav``;

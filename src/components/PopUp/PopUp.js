@@ -31,10 +31,10 @@ export default PopUp;
 const PopUpWrapper = styled.div`
   padding: 16px;
   position: absolute;
-  display: flex;
   background-color: ${COLORS.white};
+  display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
   border-radius: 6px;
   top: 36px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -43,12 +43,11 @@ const PopUpWrapper = styled.div`
 const LogOutButton = styled.button`
   border: none;
   outline: none;
+  padding: 0;
+  background-color: transparent;
   display: flex;
   align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  background-color: transparent;
-  margin-right: auto;
+  gap: 12px;
 `;
 
 const Account = styled.h4``;
