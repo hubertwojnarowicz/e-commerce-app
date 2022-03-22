@@ -1,9 +1,14 @@
-import React from 'react';
-import styled from 'styled-components/macro';
-import { COLORS, WEIGHTS, QUERIES } from '../../variables';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import styled from "styled-components/macro";
+import { COLORS, WEIGHTS, QUERIES } from "../../variables";
+import { Link } from "react-router-dom";
+import { User } from "react-feather";
+import UserContext from "../../context/user";
+import PopUp from "../PopUp";
 
 function SuperHeader() {
+  const { user } = useContext(UserContext);
+  const [hover, setHover] = useState(false);
   return (
     <SuperHeaderFullWidth>
       <SuperHeaderWrapper>
@@ -13,10 +18,21 @@ function SuperHeader() {
           </MemberShipDescription>
           <MemberShipLink to="/sign-up">Join Now</MemberShipLink>
         </ShippingWrapper>
-        <LoginButtonsWrapper>
-          <JoinUsLink to="/sign-up">Join Us</JoinUsLink>
-          <SignInLink to="/sign-in">Sign In</SignInLink>
-        </LoginButtonsWrapper>
+        {user ? (
+          <LoggedInUserWrapper
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+          >
+            <User />
+            <UserName>Hi, {user.displayName}</UserName>
+            <PopUp isOpen={hover} onMouseEnter={() => setHover(true)} />
+          </LoggedInUserWrapper>
+        ) : (
+          <LoginButtonsWrapper>
+            <JoinUsLink to="/sign-up">Join Us</JoinUsLink>
+            <SignInLink to="/sign-in">Sign In</SignInLink>
+          </LoginButtonsWrapper>
+        )}
       </SuperHeaderWrapper>
     </SuperHeaderFullWidth>
   );
@@ -72,13 +88,28 @@ const LoginButtonsWrapper = styled.div`
   position: relative;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 2px;
     height: 100%;
     margin-left: 63px;
     background-color: ${COLORS.gray[800]};
   }
+`;
+
+const LoggedInUserWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px;
+`;
+
+const UserName = styled.span`
+  font-weight: ${WEIGHTS.normal};
+  letter-spacing: -0.125px;
+  font-size: 1.05rem;
+  margin-top: 2px;
+  cursor: pointer;
 `;
 
 const JoinUsLink = styled(Link)`
