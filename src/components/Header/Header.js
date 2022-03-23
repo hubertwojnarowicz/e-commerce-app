@@ -1,27 +1,26 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
-import { COLORS, WEIGHTS, QUERIES } from "../../variables";
-import { Trash, Heart, Menu, Search, Tablet } from "react-feather";
-import MobileNav from "../MobileNav";
-import * as ROUTES from "../../constants/routes";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
+import { COLORS, QUERIES } from '../../variables';
+import { Trash, Heart, Menu, Search } from 'react-feather';
+import MobileNav from '../MobileNav';
+import * as ROUTES from '../../constants/routes';
 
 export default function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [showSearchInput, setShowSearchInput] = useState(false);
 
   useEffect(() => {
     if (showMobileMenu) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     }
   }, [showMobileMenu]);
 
   return (
     <HeaderMaxWidthWrapper>
       <HeaderWrapper>
-        <ImageWrapper to="/">
+        <ImageWrapper to={ROUTES.DASHBOARD}>
           <Logo src="images/assets/logo.jpg" />
         </ImageWrapper>
         <DesktopNavigation>
@@ -44,14 +43,12 @@ export default function Header() {
           </PrimaryNavigation>
         </DesktopNavigation>
         <SearchWrapper>
-          <Form>
-            <SearchInputWrapper>
-              <SearchInput type="text" placeholder="Search" />
-            </SearchInputWrapper>
+          <SearchInputWrapper>
+            <SearchInput type="text" placeholder="Search" />
             <IconButton>
               <Icon size="24" />
             </IconButton>
-          </Form>
+          </SearchInputWrapper>
           <FavouritesLink to={ROUTES.FAVOURITES}>
             <Heart size="32" />
           </FavouritesLink>
@@ -107,30 +104,32 @@ const HeaderWrapper = styled.header`
   width: 100%;
   max-width: 1920px;
   height: 60px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-
   background: ${COLORS.white};
-  margin: 0 32px;
-  gap: 16px;
-  padding: 16px 0;
+  margin-left: 32px;
+  margin-right: 32px;
+  gap: 8px;
 
   @media ${QUERIES.tabletAndSmaller} {
-    margin: 4px 12px 0px 12px;
+    margin-top: 4px;
   }
 `;
 
 const ImageWrapper = styled(Link)``;
 
 const Logo = styled.img`
+  width: 64px;
   height: 48px;
-  aspect-ratio: 16 / 10;
-  margin-top: 4px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 52px;
+    height: 42px;
+  }
 `;
 
 const DesktopNavigation = styled.nav`
-  margin-left: auto;
-
   @media ${QUERIES.tabletAndSmaller} {
     display: none;
   }
@@ -156,11 +155,11 @@ const NavLink = styled(Link)`
   white-space: nowrap;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 0%;
     height: 3px;
-    bottom: -20px;
+    bottom: -19px;
     background-color: ${COLORS.black};
     transition: 0.3;
   }
@@ -175,61 +174,61 @@ const NavLink = styled(Link)`
 `;
 
 const SearchWrapper = styled.div`
-  margin-left: auto;
   display: flex;
   gap: 16px;
+  justify-self: end;
   align-items: center;
-
   @media ${QUERIES.tabletAndSmaller} {
     display: none;
   }
 `;
 
-const Form = styled.form`
-  height: 32px;
+const SearchInputWrapper = styled.div`
+  border-radius: 24px;
+  background-color: ${COLORS.gray[1000]};
+  height: 40px;
+  min-width: 240px;
   position: relative;
 `;
 
-const SearchInputWrapper = styled.div`
-  // border-radius: 24px;
-  // background-color: ${COLORS.gray[1000]};
-  // height: 100%;
-  // display: flex;
-  // align-items: baseline;
-  // padding: 8px 24px;
-
-  // &:hover {
-  //   background-color: ${COLORS.gray[900]};
-  // }
-`;
-
 const SearchInput = styled.input`
-  // border: none;
-  // background-color: inherit;
-  // border-radius: 24px;
-  // margin-left: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  border-radius: 24px;
+  height: 100%;
+  outline: none;
+  border: none;
+  padding: 0 44px;
+  background-color: ${COLORS.gray[1000]};
 
-  // &:focus {
-  //   outline: none;
-  // }
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: ${COLORS.gray[900]};
+    transition: 0.3s;
+  }
 `;
 
 const IconButton = styled.button`
   position: absolute;
-  left: 0;
-  top: 0;
-  text-align: center;
   border: none;
-  background-color: inherit;
+  background-color: transparent;
   border-radius: 50%;
   display: flex;
-  height: 100%;
+  height: 40px;
+  aspect-ratio: 1;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 
   &:hover {
-    background-color: ${COLORS.gray[800]};
+    background-color: ${COLORS.gray[900]};
+    transition: 0.3s;
   }
 `;
 
@@ -275,6 +274,7 @@ const TabletWrapper = styled.div`
     gap: 24px;
     margin-left: auto;
     align-items: center;
+    grid-column: 3 / 4;
   }
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -309,5 +309,6 @@ const MobileWrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 12px;
+    grid-column: 3 / 4;
   }
 `;
