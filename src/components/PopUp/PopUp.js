@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { LogOut } from "react-feather";
-import styled from "styled-components/macro";
-import { COLORS } from "../../variables";
-import FirebaseContext from "../../context/firebase";
-import { signOut } from "firebase/auth";
+import React, { useContext } from 'react';
+import { LogOut } from 'react-feather';
+import styled from 'styled-components/macro';
+import { COLORS } from '../../variables';
+import FirebaseContext from '../../context/firebase';
+import { signOut } from 'firebase/auth';
 
 function PopUp({ isOpen }) {
   const firebase = useContext(FirebaseContext);
@@ -48,6 +48,7 @@ const LogOutButton = styled.button`
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 `;
 
 const Account = styled.h4``;
