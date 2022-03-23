@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
-import styled from "styled-components/macro";
-import { COLORS, WEIGHTS, QUERIES } from "../../variables";
-import { Link } from "react-router-dom";
-import { User } from "react-feather";
-import UserContext from "../../context/user";
-import PopUp from "../PopUp";
+import React, { useContext, useState } from 'react';
+import styled from 'styled-components/macro';
+import { COLORS, WEIGHTS, QUERIES } from '../../variables';
+import { Link } from 'react-router-dom';
+import { User } from 'react-feather';
+import UserContext from '../../context/user';
+import PopUp from '../PopUp';
 
 function SuperHeader() {
   const { user } = useContext(UserContext);
@@ -88,7 +88,7 @@ const LoginButtonsWrapper = styled.div`
   position: relative;
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     width: 2px;
     height: 100%;
@@ -110,6 +110,10 @@ const UserName = styled.span`
   font-size: 1.05rem;
   margin-top: 2px;
   cursor: pointer;
+  &:hover {
+    transition: 0.3s;
+    color: ${COLORS.gray[400]};
+  }
 `;
 
 const JoinUsLink = styled(Link)`
