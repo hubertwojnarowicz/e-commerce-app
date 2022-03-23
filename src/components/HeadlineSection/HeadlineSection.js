@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { COLORS, QUERIES, WEIGHTS } from '../../variables';
+import * as ROUTES from '../../constants/routes';
 
 function HeadlineSection() {
   return (
@@ -15,7 +16,7 @@ function HeadlineSection() {
             New Air Max 1 is now available! Get out of your comfort zone and
             open up to creativity with a retro-inspired look.
           </ShoesDescription>
-          <LinkToBuy to="new-release">Get Them Now</LinkToBuy>
+          <LinkToBuy to={ROUTES.NEWRELEASES}>Get Them Now</LinkToBuy>
         </ImageCaption>
       </HeadlineFigure>
     </SectionWrapper>
@@ -38,6 +39,7 @@ const HeadlineFigure = styled.figure`
   justify-content: center;
   flex-direction: column;
   max-width: 1920px;
+  width: 100%;
   margin: 0 32px;
 `;
 
