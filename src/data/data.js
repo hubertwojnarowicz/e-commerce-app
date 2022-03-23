@@ -44,3 +44,5 @@ export const Popular = [
     desc: "Women's Shoes",
   },
 ];
+
+export const AllShoes = [];
