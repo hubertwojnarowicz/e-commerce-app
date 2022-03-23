@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import SuperHeader from "../components/SuperHeader";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer";
-import styled from "styled-components/macro";
-import { Link, useNavigate } from "react-router-dom";
-import { COLORS, WEIGHTS } from "../variables";
-import * as ROUTES from "../constants/routes";
-import FirebaseContext from "../context/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState, useEffect, useContext } from 'react';
+import SuperHeader from '../components/SuperHeader';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer';
+import styled from 'styled-components/macro';
+import { Link, useNavigate } from 'react-router-dom';
+import { COLORS, WEIGHTS } from '../variables';
+import * as ROUTES from '../constants/routes';
+import FirebaseContext from '../context/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 function Signin() {
   const firebase = useContext(FirebaseContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const login = async (e) => {
@@ -23,14 +23,14 @@ function Signin() {
 
       navigate(ROUTES.DASHBOARD);
     } catch (error) {
-      setEmail("");
-      setPassword("");
+      setEmail('');
+      setPassword('');
       setError(error.message);
     }
   };
 
   useEffect(() => {
-    document.title = "Login";
+    document.title = 'Login';
   }, []);
   return (
     <>
@@ -57,8 +57,8 @@ function Signin() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <TermsOfUse>
-            By logging in, you agree to Fresh Balance's{" "}
-            <TermsLink to={ROUTES.DASHBOARD}>Privacy Policy </TermsLink> and{" "}
+            By logging in, you agree to Fresh Balance's{' '}
+            <TermsLink to={ROUTES.DASHBOARD}>Privacy Policy </TermsLink> and{' '}
             <TermsLink to={ROUTES.DASHBOARD}>Terms of Use.</TermsLink>
           </TermsOfUse>
           <SubmitButton type="submit">Sign In</SubmitButton>
@@ -81,7 +81,7 @@ const SignInWrapper = styled.main`
   justify-content: center;
   flex-direction: column;
   height: 76%;
-  margin: 0 16px;
+  margin: 0 32px;
 `;
 
 const SignInHeader = styled.div`
