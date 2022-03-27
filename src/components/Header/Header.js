@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import { COLORS, QUERIES } from '../../variables';
@@ -9,19 +9,11 @@ import * as ROUTES from '../../constants/routes';
 export default function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  useEffect(() => {
-    if (showMobileMenu) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [showMobileMenu]);
-
   return (
     <HeaderMaxWidthWrapper>
       <HeaderWrapper>
         <ImageWrapper to={ROUTES.DASHBOARD}>
-          <Logo src="images/assets/logo.jpg" />
+          <Logo src="/images/assets/logo.jpg" />
         </ImageWrapper>
         <DesktopNavigation>
           <PrimaryNavigation>
@@ -117,9 +109,7 @@ const HeaderWrapper = styled.header`
   }
 `;
 
-const ImageWrapper = styled(Link)``;
-
-const Logo = styled.img`
+const ImageWrapper = styled(Link)`
   width: 64px;
   height: 48px;
 
@@ -127,6 +117,11 @@ const Logo = styled.img`
     width: 52px;
     height: 42px;
   }
+`;
+
+const Logo = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 const DesktopNavigation = styled.nav`
