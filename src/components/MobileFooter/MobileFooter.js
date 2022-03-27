@@ -9,7 +9,7 @@ import {
   MapPin,
 } from 'react-feather';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import { COLORS, QUERIES, WEIGHTS } from '../../variables';
 
 function MobileFooter() {
@@ -91,6 +91,15 @@ const MobileFooterWrapper = styled.footer`
   }
 `;
 
+const slideIn = keyframes`
+  from {
+    transform: translateY(50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
+
 const TopSide = styled.div`
   display: flex;
   flex-direction: column;
@@ -139,6 +148,7 @@ const ButtonPopUp = styled.div`
   margin-left: 32px;
   gap: 8px;
   margin-top: -4px;
+  animation: ${slideIn} 500ms;
 `;
 
 const ButtonLinks = styled(Link)`
@@ -165,3 +175,4 @@ const LocationWrapper = styled.div`
 const CountryName = styled.span`
   color: ${COLORS.white};
 `;
+
