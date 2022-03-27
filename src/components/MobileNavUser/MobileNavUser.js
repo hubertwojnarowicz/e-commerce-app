@@ -1,43 +1,56 @@
 import React from 'react';
 import { ChevronLeft } from 'react-feather';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import { COLORS, QUERIES } from '../../variables';
+import { DialogOverlay, DialogContent } from '@reach/dialog';
 
 function MobileNavUser({ isOpen, onDismiss, children }) {
-  if (!isOpen) return null;
   return (
-    <UserButton>
-      <ExitButton onClick={onDismiss}>
-        <ChevronLeft />
-        <ExitButtonText>All</ExitButtonText>
-      </ExitButton>
-      {children}
-    </UserButton>
+    <Overlay isOpen={isOpen} onDismiss={onDismiss}>
+      <Content aria-label="user-menu">
+        <ExitButton onClick={onDismiss}>
+          <ChevronLeft />
+          <ExitButtonText>All</ExitButtonText>
+        </ExitButton>
+        {children}
+      </Content>
+    </Overlay>
   );
 }
 
 export default MobileNavUser;
 
-const UserButton = styled.div`
-  background-color: ${COLORS.white};
+const Overlay = styled(DialogOverlay)`
   position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 10;
+  inset: 0;
+  background-color: hsl(220deg 5% 40% / 0.7);
+  display: flex;
+  justify-content: flex-end;
+`;
+const slideIn = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+`;
+
+const Content = styled(DialogContent)`
+  background-color: ${COLORS.white};
   height: 100%;
+  width: 60%;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  padding: 12px 24px 0px 24px;
-  gap: 16px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
-  @media ${QUERIES.tabletAndSmaller} {
-    inset: 0% 0% 0% 60%;
-  }
+  gap: 12px;
+  padding: 12px 24px 0px 24px;
+  animation: ${slideIn} 500ms both cubic-bezier(0, 0.6, 0.32, 1);
+
+  animation-delay: 200ms;
 
   @media ${QUERIES.phoneAndSmaller} {
-    inset: 0% 0% 0% 25%;
+    width: 75%;
   }
 `;
 
