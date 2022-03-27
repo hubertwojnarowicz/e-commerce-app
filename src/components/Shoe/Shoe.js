@@ -1,12 +1,11 @@
-import React from "react";
-import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/routes";
-import { COLORS } from "../../variables";
+import React from 'react';
+import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
+import { COLORS } from '../../variables';
 
-function Shoe({ name, imgSrc, desc, price, salePrice }) {
+function Shoe({ index, name, imgSrc, desc, price, salePrice }) {
   return (
-    <ShoeLink to={ROUTES.DASHBOARD}>
+    <ShoeLink to={`/t/${index}`}>
       <ShoeWrapper>
         <ImageWrapper>
           <ShoeImg src={imgSrc} />
@@ -15,13 +14,12 @@ function Shoe({ name, imgSrc, desc, price, salePrice }) {
         <ShoeName>{name}</ShoeName>
         <ShoeDesc>{desc}</ShoeDesc>
         {salePrice ? (
-          <ShoePrice style={{ color: "gray", textDecoration: "line-through" }}>
+          <ShoePrice style={{ color: 'gray', textDecoration: 'line-through' }}>
             ${price}
           </ShoePrice>
         ) : (
-          <ShoePrice style={{ color: "black" }}>${price}</ShoePrice>
+          <ShoePrice style={{ color: 'black' }}>${price}</ShoePrice>
         )}
-
         {salePrice ? <SalePrice>${salePrice}</SalePrice> : null}
       </ShoeWrapper>
     </ShoeLink>
@@ -87,3 +85,4 @@ const SaleFlag = styled.div`
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
+
