@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import { ChevronRight, X, Heart, Trash, User } from 'react-feather';
 import MobileNavUser from '../MobileNavUser';
 import { COLORS, QUERIES } from '../../variables';
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../context/user';
 import { signOut } from 'firebase/auth';
 import FirebaseContext from '../../context/firebase';
+import { DialogOverlay, DialogContent } from '@reach/dialog';
 
 function MobileNav({ isOpen, onDismiss }) {
   const { user } = useContext(UserContext);
@@ -18,80 +19,78 @@ function MobileNav({ isOpen, onDismiss }) {
     setUserNav(false);
   };
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <>
-      <MobileNavWrapper>
-        <CloseButton onClick={onDismiss}>
-          <X size="32" />
-        </CloseButton>
-        <MobileNavigation>
-          {user ? (
-            <UserButton onClick={() => setUserNav(true)}>
-              <User size="32" />
-              <UserText>Hi, {user.displayName}</UserText>
-              <ChevronRight size="32" />
-            </UserButton>
-          ) : null}
+      <Overlay isOpen={isOpen} onDismiss={onDismiss}>
+        <Content aria-label="Menu">
+          <CloseButton onClick={onDismiss}>
+            <X size="32" />
+          </CloseButton>
+          <MobileNavigation>
+            {user ? (
+              <UserButton onClick={() => setUserNav(true)}>
+                <User size="32" />
+                <UserText>Hi, {user.displayName}</UserText>
+                <ChevronRight size="32" />
+              </UserButton>
+            ) : null}
 
-          <PrimaryMobileNavigation>
-            <MobileListItems>
-              <MobileLink to={ROUTES.NEWRELEASES}>
-                <LinkChild>New Releases</LinkChild>
-                <ChevronRight size="32" />
-              </MobileLink>
-            </MobileListItems>
-            <MobileListItems>
-              <MobileLink to={ROUTES.MEN}>
-                <LinkChild>Man</LinkChild>
-                <ChevronRight size="32" />
-              </MobileLink>
-            </MobileListItems>
-            <MobileListItems>
-              <MobileLink to={ROUTES.WOMEN}>
-                <LinkChild>Woman</LinkChild>
-                <ChevronRight size="32" />
-              </MobileLink>
-            </MobileListItems>
-            <MobileListItems>
-              <MobileLink to={ROUTES.KIDS}>
-                <LinkChild>Kids</LinkChild>
-                <ChevronRight size="32" />
-              </MobileLink>
-            </MobileListItems>
-            <MobileListItems>
-              <MobileLink to={ROUTES.SALE}>
-                <LinkChild>Sale</LinkChild>
-                <ChevronRight size="32" />
-              </MobileLink>
-            </MobileListItems>
-          </PrimaryMobileNavigation>
-        </MobileNavigation>
-        <Description>
-          Become a Fresh Balance Member for the best products, inspiration and
-          stories in sport.
-        </Description>
-        {user ? null : (
-          <LoginsWrapper>
-            <JoinsUsLink to={ROUTES.SIGNUP}>Join Us</JoinsUsLink>
-            <LoginLink to={ROUTES.SIGNIN}>Sign In</LoginLink>
-          </LoginsWrapper>
-        )}
+            <PrimaryMobileNavigation>
+              <MobileListItems>
+                <MobileLink to={ROUTES.NEWRELEASES}>
+                  <LinkChild>New Releases</LinkChild>
+                  <ChevronRight size="32" />
+                </MobileLink>
+              </MobileListItems>
+              <MobileListItems>
+                <MobileLink to={ROUTES.MEN}>
+                  <LinkChild>Man</LinkChild>
+                  <ChevronRight size="32" />
+                </MobileLink>
+              </MobileListItems>
+              <MobileListItems>
+                <MobileLink to={ROUTES.WOMEN}>
+                  <LinkChild>Woman</LinkChild>
+                  <ChevronRight size="32" />
+                </MobileLink>
+              </MobileListItems>
+              <MobileListItems>
+                <MobileLink to={ROUTES.KIDS}>
+                  <LinkChild>Kids</LinkChild>
+                  <ChevronRight size="32" />
+                </MobileLink>
+              </MobileListItems>
+              <MobileListItems>
+                <MobileLink to={ROUTES.SALE}>
+                  <LinkChild>Sale</LinkChild>
+                  <ChevronRight size="32" />
+                </MobileLink>
+              </MobileListItems>
+            </PrimaryMobileNavigation>
+          </MobileNavigation>
+          <Description>
+            Become a Fresh Balance Member for the best products, inspiration and
+            stories in sport.
+          </Description>
+          {user ? null : (
+            <LoginsWrapper>
+              <JoinsUsLink to={ROUTES.SIGNUP}>Join Us</JoinsUsLink>
+              <LoginLink to={ROUTES.SIGNIN}>Sign In</LoginLink>
+            </LoginsWrapper>
+          )}
 
-        <FavouritesAndBagWrapper>
-          <FavouritesLinks to={ROUTES.FAVOURITES}>
-            <Heart />
-            <LinkText>Favourites</LinkText>
-          </FavouritesLinks>
-          <FavouritesLinks to={ROUTES.CART}>
-            <Trash />
-            <LinkText>Bag</LinkText>
-          </FavouritesLinks>
-        </FavouritesAndBagWrapper>
-      </MobileNavWrapper>
+          <FavouritesAndBagWrapper>
+            <FavouritesLinks to={ROUTES.FAVOURITES}>
+              <Heart />
+              <LinkText>Favourites</LinkText>
+            </FavouritesLinks>
+            <FavouritesLinks to={ROUTES.CART}>
+              <Trash />
+              <LinkText>Bag</LinkText>
+            </FavouritesLinks>
+          </FavouritesAndBagWrapper>
+        </Content>
+      </Overlay>
       <MobileNavUser onDismiss={() => setUserNav(false)} isOpen={userNav}>
         <LogOutButton onClick={logOut}>Log Out</LogOutButton>
       </MobileNavUser>
@@ -101,26 +100,37 @@ function MobileNav({ isOpen, onDismiss }) {
 
 export default MobileNav;
 
-const MobileNavWrapper = styled.div`
-  background-color: ${COLORS.white};
+const Overlay = styled(DialogOverlay)`
   position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 10;
+  inset: 0;
+  background-color: hsl(220deg 5% 40% / 0.7);
+  display: flex;
+  justify-content: flex-end;
+`;
+const slideIn = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+`;
+
+const Content = styled(DialogContent)`
+  background-color: ${COLORS.white};
   height: 100%;
+  width: 60%;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   padding: 12px 24px 0px 24px;
   gap: 16px;
+  overflow-y: auto;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
-  @media ${QUERIES.tabletAndSmaller} {
-    inset: 0% 0% 0% 60%;
-  }
+  animation: ${slideIn} 500ms both cubic-bezier(0, 0.6, 0.32, 1);
+  animation-delay: 200ms;
 
   @media ${QUERIES.phoneAndSmaller} {
-    inset: 0% 0% 0% 25%;
+    width: 75%;
   }
 `;
 
@@ -231,7 +241,10 @@ const LogOutButton = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
-  width: 35%;
+  margin-right: auto;
   font-size: 1.125rem;
+  padding: 4 8px;
+  margin-left: 2px;
   background-color: transparent;
 `;
+
