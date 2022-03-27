@@ -15,6 +15,7 @@ const Favourites = lazy(() => import("./pages/Favourites"));
 const SignIn = lazy(() => import("./pages/SignIn"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const Sale = lazy(() => import("./pages/Sale"));
+const Shoes = lazy(() => import('./pages/Shoes'));
 
 export default function App() {
   const { user } = useAuthListener();
@@ -34,6 +35,7 @@ export default function App() {
             <Route path={ROUTES.SIGNIN} element={<SignIn />} />
             <Route path={ROUTES.SIGNUP} element={<SignUp />} />
             <Route path={ROUTES.SALE} element={<Sale />} />
+            <Route path={ROUTES.SHOE} element={<Shoes />} />
           </Routes>
         </Suspense>
       </Router>
