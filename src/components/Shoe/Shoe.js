@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
-import { COLORS } from '../../variables';
+import React from "react";
+import styled from "styled-components/macro";
+import { Link } from "react-router-dom";
+import { COLORS } from "../../variables";
 
 function Shoe({ index, name, imgSrc, desc, price, salePrice }) {
   return (
@@ -13,14 +13,20 @@ function Shoe({ index, name, imgSrc, desc, price, salePrice }) {
         {salePrice ? <SaleFlag>Sale</SaleFlag> : null}
         <ShoeName>{name}</ShoeName>
         <ShoeDesc>{desc}</ShoeDesc>
+        {salePrice ? <SalePrice>${salePrice}</SalePrice> : null}
         {salePrice ? (
-          <ShoePrice style={{ color: 'gray', textDecoration: 'line-through' }}>
+          <ShoePrice
+            style={{
+              color: "gray",
+              textDecoration: "line-through",
+              marginLeft: "8px",
+            }}
+          >
             ${price}
           </ShoePrice>
         ) : (
-          <ShoePrice style={{ color: 'black' }}>${price}</ShoePrice>
+          <ShoePrice style={{ color: "black" }}>${price}</ShoePrice>
         )}
-        {salePrice ? <SalePrice>${salePrice}</SalePrice> : null}
       </ShoeWrapper>
     </ShoeLink>
   );
@@ -72,7 +78,6 @@ const ShoePrice = styled.span`
 
 const SalePrice = styled.span`
   color: ${COLORS.black};
-  margin-left: 8px;
 `;
 
 const SaleFlag = styled.div`
@@ -85,4 +90,3 @@ const SaleFlag = styled.div`
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
-

@@ -1,32 +1,32 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
-import SuperHeader from '../components/SuperHeader';
-import Header from '../components/Header/Header';
-import styled from 'styled-components/macro';
-import Footer from '../components/Footer';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { query, collection, getDocs, where, addDoc } from 'firebase/firestore';
-import FirebaseContext from '../context/firebase';
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as ROUTES from "../constants/routes";
+import SuperHeader from "../components/SuperHeader";
+import Header from "../components/Header/Header";
+import styled from "styled-components/macro";
+import Footer from "../components/Footer";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { query, collection, getDocs, where, addDoc } from "firebase/firestore";
+import FirebaseContext from "../context/firebase";
 
-import { COLORS, WEIGHTS } from '../variables';
+import { COLORS, WEIGHTS } from "../variables";
 
 function Signup() {
   const navigate = useNavigate();
   const firebase = useContext(FirebaseContext);
-  const [error, setError] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [error, setError] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
-    document.title = 'Register';
+    document.title = "Register";
   }, []);
 
   const doesUsernameExist = async () => {
     const result = query(
-      collection(firebase.db, 'users'),
-      where('name', '==', name.toLowerCase())
+      collection(firebase.db, "users"),
+      where("name", "==", name.toLowerCase())
     );
     const docs = await getDocs(result);
     return docs.docs.length > 0; // if there is no user the length of the docs array is 0
@@ -44,23 +44,23 @@ function Signup() {
           password
         );
         const user = res.user;
-        await addDoc(collection(firebase.db, 'users'), {
+        await addDoc(collection(firebase.db, "users"), {
           uid: user.uid,
           username: name,
-          authProvider: 'local',
+          authProvider: "local",
           emailAdress: email.toLocaleLowerCase(),
         });
 
         navigate(ROUTES.DASHBOARD);
       } catch (error) {
-        setName('');
-        setEmail('');
-        setPassword('');
+        setName("");
+        setEmail("");
+        setPassword("");
         setError(error.message);
       }
     } else {
-      setName('');
-      setError('That username is already taken, please try another.');
+      setName("");
+      setError("That username is already taken, please try another.");
     }
   };
 
@@ -126,6 +126,7 @@ const SignUpWrapper = styled.main`
   align-items: center;
   height: 76%;
   margin: 0 32px;
+  margin-top: 32px;
 `;
 
 const SignUpHeader = styled.div`
