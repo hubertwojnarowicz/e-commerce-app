@@ -26,7 +26,7 @@ function NewReleases() {
         <NewReleasesWrapper>
           {AllShoes.map((boot) => {
             return (
-              <ShoeWrapper key={boot.index}>
+              <ShoeWrapper key={boot.id}>
                 <Shoe {...boot} />
               </ShoeWrapper>
             );

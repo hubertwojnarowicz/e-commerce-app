@@ -5,9 +5,11 @@ import { COLORS, QUERIES } from '../../variables';
 import { Trash, Heart, Menu, Search } from 'react-feather';
 import MobileNav from '../MobileNav';
 import * as ROUTES from '../../constants/routes';
+import { useCart } from 'react-use-cart';
 
 export default function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const { totalItems } = useCart();
 
   return (
     <HeaderMaxWidthWrapper>
@@ -44,8 +46,11 @@ export default function Header() {
           <FavouritesLink to={ROUTES.FAVOURITES}>
             <Heart size="32" />
           </FavouritesLink>
-          <CartLink to="cart">
+          <CartLink to={ROUTES.CART}>
             <Trash size="32" />
+            {totalItems ? (
+              <AmmountOfCartItems>{totalItems}</AmmountOfCartItems>
+            ) : null}
           </CartLink>
         </SearchWrapper>
         <TabletWrapper>
@@ -255,10 +260,18 @@ const CartLink = styled(Link)`
   border-radius: 50%;
   width: 42px;
   height: 42px;
+  position: relative;
 
   &:hover {
     background-color: ${COLORS.gray[900]};
   }
+`;
+
+const AmmountOfCartItems = styled.span`
+  position: absolute;
+  top: 57%;
+  transform: translate(-50%, -50%);
+  left: 50%;
 `;
 
 const TabletWrapper = styled.div`

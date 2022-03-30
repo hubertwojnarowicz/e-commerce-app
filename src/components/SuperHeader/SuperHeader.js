@@ -23,7 +23,7 @@ function SuperHeader() {
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
           >
-            <User />
+            <UserIcon />
             <UserName>Hi, {user.displayName}</UserName>
             <PopUp isOpen={hover} onMouseEnter={() => setHover(true)} />
           </LoggedInUserWrapper>
@@ -68,6 +68,10 @@ const ShippingWrapper = styled.div`
   display: flex;
   align-items: baseline;
   gap: 8px;
+`;
+
+const UserIcon = styled(User)`
+  cursor: pointer;
 `;
 
 const MemberShipDescription = styled.span`

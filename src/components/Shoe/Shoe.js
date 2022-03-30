@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
-import { COLORS } from "../../variables";
+import React from 'react';
+import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
+import { COLORS } from '../../variables';
 
-function Shoe({ index, name, imgSrc, desc, price, salePrice }) {
+function Shoe({ id, name, imgSrc, desc, price, salePrice }) {
   return (
-    <ShoeLink to={`/t/${index}`}>
+    <ShoeLink to={`/t/${id}`}>
       <ShoeWrapper>
         <ImageWrapper>
           <ShoeImg src={imgSrc} />
@@ -17,15 +17,15 @@ function Shoe({ index, name, imgSrc, desc, price, salePrice }) {
         {salePrice ? (
           <ShoePrice
             style={{
-              color: "gray",
-              textDecoration: "line-through",
-              marginLeft: "8px",
+              color: 'gray',
+              textDecoration: 'line-through',
+              marginLeft: '8px',
             }}
           >
             ${price}
           </ShoePrice>
         ) : (
-          <ShoePrice style={{ color: "black" }}>${price}</ShoePrice>
+          <ShoePrice style={{ color: 'black' }}>${price}</ShoePrice>
         )}
       </ShoeWrapper>
     </ShoeLink>

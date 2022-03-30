@@ -26,7 +26,7 @@ function Kids() {
         <NewReleasesWrapper>
           {getKidsShoes.map((boot) => {
             return (
-              <ShoeWrapper key={boot.index}>
+              <ShoeWrapper key={boot.id}>
                 <Shoe {...boot} />
               </ShoeWrapper>
             );

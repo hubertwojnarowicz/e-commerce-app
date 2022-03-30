@@ -3,6 +3,7 @@ import { Popular } from '../../data/data';
 import styled, { keyframes } from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import { COLORS, QUERIES } from '../../variables';
+import * as ROUTES from '../../constants/routes';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 
 function Slider() {
@@ -40,12 +41,14 @@ function Slider() {
           const { index, imgSrc, name, price, desc } = shoe;
           return (
             <ShoeItem key={index} ref={slideLeft}>
-              <ShoeLink to="/new-release">
-                <DesktopShoeImg
-                  src={imgSrc}
-                  alt="Shoe"
-                  height={height / 3.06}
-                />
+              <ShoeLink to={ROUTES.NEWRELEASES}>
+                <ImageWrapper>
+                  <DesktopShoeImg
+                    src={imgSrc}
+                    alt="Shoe"
+                    height={height / 3.06}
+                  />
+                </ImageWrapper>
 
                 <TabletShoeImg src={imgSrc} alt="Shoe" height={height / 2.05} />
                 <PhoneShoeImg src={imgSrc} alt="Shoe" height={height / 1.03} />
@@ -117,7 +120,22 @@ const ShoeLink = styled(Link)`
   animation: fadeVisibility 0.5s;
 `;
 
+const ImageWrapper = styled.div`
+  overflow: hidden;
+`;
+
 const DesktopShoeImg = styled.img`
+  display: block;
+  transform-origin: 50% 75%;
+  transition: transform 600ms;
+  will-change: transform;
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    ${ShoeLink}:hover &,
+    ${ShoeLink}:focus & {
+      transform: scale(1.1);
+      transition: transform 200ms;
+    }
+  }
   @media ${QUERIES.tabletAndSmaller} {
     display: none;
   }
