@@ -1,1 +1,1 @@
-export { default } from "./SizeGrid";
+export { default } from './SizeGrid';
