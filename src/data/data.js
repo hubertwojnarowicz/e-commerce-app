@@ -78,6 +78,7 @@ export const AllShoes = [
     name: 'Nike Air Huarache',
     releaseDate: Date.now() - 1000 * 2,
     price: 120,
+    selectedSize: [],
     desc: "Men's Shoes",
     salePrice: null,
     forWho: 'Men',
@@ -92,6 +93,7 @@ export const AllShoes = [
     name: 'Nike Air Max Plus',
     releaseDate: Date.now() - 1000 * 32,
     price: 180,
+    selectedSize: [],
     desc: "Men's Shoes",
     salePrice: null,
     sizes: [
@@ -105,6 +107,7 @@ export const AllShoes = [
     name: 'Nike Air Vapormax 2021',
     releaseDate: Date.now() - 1000 * 6,
     price: 210,
+
     desc: "Men's Shoes",
     salePrice: 195,
     sizes: [
@@ -119,6 +122,7 @@ export const AllShoes = [
     name: 'Nike Air Zoom Pegasus 38',
     releaseDate: Date.now() - 1000 * 18,
     price: 120,
+    selectedSize: [],
     desc: "Men's Running Shoes",
     salePrice: null,
     sizes: [
@@ -132,6 +136,7 @@ export const AllShoes = [
     name: 'Nike Lebron 19',
     releaseDate: Date.now() - 1000 * 30,
     price: 195,
+    selectedSize: [],
     desc: "Men's Basketball Shoes",
     salePrice: 165,
     sizes: [
@@ -146,6 +151,7 @@ export const AllShoes = [
     name: 'Nike Pegasus Trail 3',
     releaseDate: Date.now() - 1000 * 24,
     price: 155,
+    selectedSize: [],
     desc: "Men's Running Shoes",
     salePrice: null,
     sizes: [
@@ -160,6 +166,7 @@ export const AllShoes = [
     name: 'Nike React Infinity Run Flyknit 2',
     releaseDate: Date.now() - 1000 * 14,
     price: 135,
+    selectedSize: [],
     desc: "Men's Running Shoes",
     salePrice: null,
     sizes: [
@@ -173,6 +180,7 @@ export const AllShoes = [
     name: 'Nike Air Force 1',
     releaseDate: Date.now() - 1000 * 16,
     price: 100,
+    selectedSize: [],
     desc: "Women's Shoes",
     salePrice: null,
     sizes: [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
@@ -184,6 +192,7 @@ export const AllShoes = [
     name: 'Nike Air Max 90',
     releaseDate: Date.now() - 1000 * 8,
     price: 125,
+    selectedSize: [],
     desc: "Women's Shoes",
     salePrice: null,
     sizes: [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
@@ -196,6 +205,7 @@ export const AllShoes = [
     name: 'Nike Air Max 97',
     releaseDate: Date.now() - 1000 * 20,
     price: 145,
+    selectedSize: [],
     desc: "Women's Shoes",
     salePrice: null,
     sizes: [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
@@ -208,6 +218,7 @@ export const AllShoes = [
     name: 'Nike Air Vapormax 2021',
     releaseDate: Date.now() - 1000 * 22,
     price: 175,
+    selectedSize: [],
     desc: "Women's Shoes",
     salePrice: 165,
     sizes: [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
@@ -220,6 +231,7 @@ export const AllShoes = [
     name: 'Nike Air Zoom Pegasus 38',
     releaseDate: Date.now() - 1000 * 12,
     price: 115,
+    selectedSize: [],
     desc: "Women's Running Shoes",
     salePrice: null,
     sizes: [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
@@ -233,6 +245,7 @@ export const AllShoes = [
     name: 'Nike Blazer Mid 77',
     releaseDate: Date.now() - 1000 * 26,
     price: 105,
+    selectedSize: [],
     desc: "Women's  Shoes",
     salePrice: null,
     sizes: [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
@@ -245,6 +258,7 @@ export const AllShoes = [
     name: 'Nike Offcourt',
     releaseDate: Date.now() - 1000 * 28,
     price: 85,
+    selectedSize: [],
     desc: "Women's  Slides",
     salePrice: 75,
     sizes: [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
@@ -258,6 +272,7 @@ export const AllShoes = [
     name: 'Nike React Infinity Run Flyknit 2',
     releaseDate: Date.now() - 1000 * 10,
     price: 115,
+    selectedSize: [],
     desc: "Women's  Running Shoes",
     salePrice: 100,
     sizes: [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
@@ -270,6 +285,7 @@ export const AllShoes = [
     name: 'Nike Air Max 90',
     releaseDate: Date.now() - 1000 * 4,
     price: 80,
+    selectedSize: [],
     desc: "Little Kids's Shoes",
     salePrice: null,
     sizes: [
@@ -294,6 +310,7 @@ export const AllShoes = [
     name: 'Nike Air Max 270',
     releaseDate: Date.now() - 1000 * 34,
     price: 100,
+    selectedSize: [],
     desc: "Big Kids' Shoes",
     salePrice: null,
     sizes: [
@@ -318,6 +335,7 @@ export const AllShoes = [
     name: 'Nike Air Max Motif',
     releaseDate: Date.now() - 1000 * 36,
     price: 95,
+    selectedSize: [],
     desc: "Big Kids' Shoes",
     salePrice: 85,
     sizes: [
@@ -342,6 +360,7 @@ export const AllShoes = [
     name: 'Nike Air Max Sc',
     releaseDate: Date.now() - 1000 * 38,
     price: 45,
+    selectedSize: [],
     desc: 'Baby/Toddler Shoes',
     salePrice: null,
     sizes: [
@@ -391,6 +410,7 @@ export const AllShoes = [
     name: 'Nike Jordan 6 Retro Low',
     releaseDate: Date.now() - 1000 * 42,
     price: 80,
+    selectedSize: [],
     desc: 'Baby/Toddler Shoes',
     salePrice: null,
     sizes: [
@@ -415,6 +435,7 @@ export const AllShoes = [
     name: 'Nike Kyrie Infinity',
     releaseDate: Date.now() - 1000 * 44,
     price: 65,
+    selectedSize: [],
     desc: "Little Kids' Shoes",
     salePrice: 55,
     sizes: [
@@ -439,6 +460,7 @@ export const AllShoes = [
     name: 'Nike Little Posite One',
     releaseDate: Date.now() - 1000 * 46,
     price: 75,
+    selectedSize: [],
     desc: "Big Kids' Shoes",
     salePrice: 65,
     sizes: [
