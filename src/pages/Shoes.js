@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { AllShoes } from '../data/data';
 import styled from 'styled-components/macro';
@@ -19,10 +19,10 @@ function Shoes() {
       <Header />
       <MaxWidthWrapper>
         {findCorrespondingShoe.map((shoe) => {
-          const { id, imgSrc, name, desc, price, salePrice, sizes } = shoe;
+          const { imgSrc, name, desc, price, salePrice, sizes } = shoe;
           return (
-            <ShoeWrapper key={id}>
-              <ImageColumnWrapper key={id}>
+            <ShoeWrapper key={Math.random() * 10}>
+              <ImageColumnWrapper>
                 <ShoeImg src={imgSrc} alt="shoe" />
               </ImageColumnWrapper>
               <RightColumnWrapper>
@@ -60,25 +60,33 @@ export default Shoes;
 const MaxWidthWrapper = styled.main`
   display: flex;
   justify-content: center;
-  margin-top: 56px;
-  height: 73%;
 `;
 
 const ShoeWrapper = styled.div`
   display: flex;
   gap: 64px;
-  margin-bottom: 16px;
   margin-left: 32px;
+  margin-top: 56px;
   margin-right: 32px;
+  margin-bottom: 16px;
 
   @media ${QUERIES.tabletAndSmaller} {
-    display: grid;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
   }
 `;
 
 const ImageColumnWrapper = styled.div`
-  min-width: 440px;
-  max-width: 600px;
+  min-width: 460px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    min-width: 100%;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    min-width: 320px;
+  }
 `;
 
 const ShoeImg = styled.img`
