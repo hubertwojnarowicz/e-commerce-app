@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Popular } from '../../data/data';
-import styled, { keyframes } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import { COLORS, QUERIES } from '../../variables';
 import * as ROUTES from '../../constants/routes';
@@ -17,6 +17,8 @@ function Slider() {
 
   const scroll = (scrollValue) => {
     wrapperWidth.current.scrollLeft += scrollValue;
+    // there is a little slider move when the arrows button are clicked
+    // this issue is caused by gap, i dont know how to fix that probably use gap: calc()
   };
 
   return (
@@ -46,12 +48,12 @@ function Slider() {
                   <DesktopShoeImg
                     src={imgSrc}
                     alt="Shoe"
-                    height={height / 3.06}
+                    height={height / 3.09}
                   />
                 </ImageWrapper>
 
-                <TabletShoeImg src={imgSrc} alt="Shoe" height={height / 2.05} />
-                <PhoneShoeImg src={imgSrc} alt="Shoe" height={height / 1.03} />
+                <TabletShoeImg src={imgSrc} alt="Shoe" height={height / 2.04} />
+                <PhoneShoeImg src={imgSrc} alt="Shoe" height={height / 1} />
                 <ShoeNamePriceWrapper>
                   <ShoeName>{name}</ShoeName>
                   <ShoePrice>${price}</ShoePrice>
@@ -71,6 +73,8 @@ export default Slider;
 const ShoeWrapper = styled.section`
   display: grid;
   margin-top: 48px;
+  margin-bottom: 48px;
+
   gap: 32px;
   place-content: center;
 `;
@@ -181,16 +185,6 @@ const ShoePrice = styled.span`
 const ShoeDesc = styled.p`
   margin-top: 4px;
   color: ${COLORS.gray[300]};
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   margin-left: 4px;
-`;
-
-const fadeVisibility = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-    transform: opacity linear;
-  }
 `;
