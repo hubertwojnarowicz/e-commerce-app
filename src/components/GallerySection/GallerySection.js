@@ -2,25 +2,26 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import { COLORS, QUERIES } from '../../variables';
+import * as ROUTES from '../../constants/routes';
 
 function GallerySection() {
   return (
     <GalleryWrapper>
       <GalleryTitle>More Fresh Balance products</GalleryTitle>
       <GalleryGrid>
-        <MansLink to="/man">
+        <MansLink to={ROUTES.MEN}>
           <MansFigure>
             <MansImage src="images/mans.jpg" />
             <MansCaption>Mans</MansCaption>
           </MansFigure>
         </MansLink>
-        <WomansLink to="woman">
+        <WomansLink to={ROUTES.WOMEN}>
           <WomanFigure>
             <WomansImage src="images/womans.jpg" />
             <WomansCaption>Womans</WomansCaption>
           </WomanFigure>
         </WomansLink>
-        <KidsLink to="/kids">
+        <KidsLink to={ROUTES.KIDS}>
           <KidsFigure>
             <KidsImage src="images/kids.jpg" />
             <KidsCaption>Kids</KidsCaption>
