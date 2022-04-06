@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-import { COLORS } from '../../variables';
+import { COLORS, QUERIES } from '../../variables';
 import { Heart } from 'react-feather';
 import { useCart } from 'react-use-cart';
 
 function SizeGrid({ sizes, shoe }) {
-  const shoeObj = shoe[0];
-  const { addItem, updateItem } = useCart();
+  const { addItem } = useCart();
+
   const [error, setError] = useState('');
   const [checkedValue, setCheckedValue] = useState('');
   const findChecked = (e) => {
@@ -15,17 +15,16 @@ function SizeGrid({ sizes, shoe }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!checkedValue) {
       setError('Please select size');
     }
-    const shoeSizes = shoeObj.selectedSize;
-    shoeSizes.push(checkedValue);
-    addItem(shoeObj);
-  };
 
-  console.log(shoe);
+    const sizesArr = shoe[0].selectedSize;
+    sizesArr.push(checkedValue);
+    addItem(...shoe);
+  };
 
   return (
     <SizeForm onSubmit={handleSubmit}>
@@ -69,6 +68,7 @@ const SizeForm = styled.form`
   flex-direction: column;
   gap: 6px;
   margin-top: 24px;
+  margin-bottom: 24px;
 `;
 
 const SizeInfoWrapper = styled.div`
@@ -89,6 +89,14 @@ const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 70px);
   gap: 8px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    grid-template-columns: repeat(5, 19%);
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    grid-template-columns: repeat(3, 31%);
+  }
 `;
 
 const OneCube = styled.div`
