@@ -156,8 +156,7 @@ const FooterWrapper = styled.footer`
   align-items: center;
   padding: 32px;
   justify-content: center;
-  margin-top: 32px;
-
+  margin-top: auto;
   @media ${QUERIES.phoneAndSmaller} {
     display: none;
   }
