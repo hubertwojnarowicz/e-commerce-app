@@ -9,10 +9,13 @@ import UserContext from '../../context/user';
 import { signOut } from 'firebase/auth';
 import FirebaseContext from '../../context/firebase';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
+import { useCart } from 'react-use-cart';
 
 function MobileNav({ isOpen, onDismiss }) {
   const { user } = useContext(UserContext);
   const [userNav, setUserNav] = useState(false);
+  const { totalItems } = useCart();
+
   const firebase = useContext(FirebaseContext);
   const logOut = () => {
     signOut(firebase.auth);
@@ -85,7 +88,11 @@ function MobileNav({ isOpen, onDismiss }) {
               <LinkText>Favourites</LinkText>
             </FavouritesLinks>
             <FavouritesLinks to={ROUTES.CART}>
-              <Trash />
+              <TrashIcon />
+              {totalItems ? (
+                <AmmountOfCartItems>{totalItems}</AmmountOfCartItems>
+              ) : null}
+
               <LinkText>Bag</LinkText>
             </FavouritesLinks>
           </FavouritesAndBagWrapper>
@@ -211,6 +218,18 @@ const FavouritesLinks = styled(Link)`
   color: ${COLORS.black};
   align-items: center;
   gap: 24px;
+  position: relative;
+`;
+
+const TrashIcon = styled(Trash)``;
+
+const AmmountOfCartItems = styled.span`
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  color: ${COLORS.black};
+
+  font-size: 0.875rem;
 `;
 
 const LinkText = styled.span`
@@ -247,4 +266,3 @@ const LogOutButton = styled.button`
   margin-left: 2px;
   background-color: transparent;
 `;
-

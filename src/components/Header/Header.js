@@ -56,6 +56,9 @@ export default function Header() {
         <TabletWrapper>
           <CartLinkMobile to={ROUTES.CART}>
             <Trash size="28" />
+            {totalItems ? (
+              <AmmountOfCartItems>{totalItems}</AmmountOfCartItems>
+            ) : null}
           </CartLinkMobile>
           <SearchButton>
             <Search size="28" />
@@ -71,6 +74,9 @@ export default function Header() {
         <MobileWrapper>
           <CartLinkMobile to={ROUTES.CART}>
             <Trash size="24" />
+            {totalItems ? (
+              <AmmountOfCartItems>{totalItems}</AmmountOfCartItems>
+            ) : null}
           </CartLinkMobile>
           <SearchButton>
             <Search size="24" />
@@ -269,9 +275,18 @@ const CartLink = styled(Link)`
 
 const AmmountOfCartItems = styled.span`
   position: absolute;
-  top: 57%;
+  top: 55%;
   transform: translate(-50%, -50%);
   left: 50%;
+  font-size: 0.95rem;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    top: 46%;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    top: 45%;
+  }
 `;
 
 const TabletWrapper = styled.div`
@@ -292,6 +307,7 @@ const TabletWrapper = styled.div`
 
 const CartLinkMobile = styled(Link)`
   color: ${COLORS.black};
+  position: relative;
 `;
 
 const SearchButton = styled.button`
